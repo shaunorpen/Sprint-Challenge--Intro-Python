@@ -77,21 +77,15 @@ for c in cities:
 # Tucson: (32.1558,-110.8777)
 # Salt Lake City: (40.7774,-111.9301)
 
-# Get latitude and longitude values from the user
+# Get the two points which define the square from the user
 
-point1 = input("Enter lat1, lon1:").split(",")
-point2 = input("Enter lat2, lon2:").split(",")
-
-# Ensure that the lat and lon valuse are all floats
-
-lat1 = float(point1[0])
-lon1 = float(point1[1])
-
-lat2 = float(point2[0])
-lon2 = float(point2[1])
+lat1, lon1 = [float(val) for val in input("Enter lat1, lon1:").split(",")]
+lat2, lon2 = [float(val) for val in input("Enter lat2, lon2:").split(",")]
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
-  # Normalise the input data so lat1 / lon1 are always the smaller values
+
+  # Make sure lat1 and lon1 are the smaller values so they represent the left bottom point
+  # lat2 and lon2 will therefore represent the upper right point of the search area
 
   if lat1 > lat2:
     lat2, lat1 = lat1, lat2
@@ -99,11 +93,7 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   if lon1 > lon2:
     lon2, lon1 = lon1, lon2
 
-  # within will hold the cities that fall within the specified region
-  # Go through each city and check to see if it falls within 
-  # the specified coordinates.
-
-  within = [city for city in cities if (city.lat > lat1 and city.lat < lat2) and (city.lon > lon1 and city.lon < lon2)]
+  within = [city for city in cities if (city.lat >= lat1 and city.lat <= lat2) and (city.lon >= lon1 and city.lon <= lon2)]
 
   return within
 
