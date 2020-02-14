@@ -98,4 +98,4 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   return within
 
 for city in cityreader_stretch(lat1, lon1, lat2, lon2, cities):
-  print(f"{city.name}: ({city.lat}, {city.lon})")
+  print(city)
